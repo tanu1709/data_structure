@@ -3,8 +3,9 @@
 > **Contains below *DataStructure* programs in Ruby:**
 
 > - Selection sort
-> - Quick sort
 > - Bubble sort
+> - Insertion sort
+> - Quick sort
 > - Merge sort
 > - Linear Search
 > - Binary Search
