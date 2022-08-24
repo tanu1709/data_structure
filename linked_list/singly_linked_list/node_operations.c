@@ -160,6 +160,7 @@ struct Node* delete_at_nth_pos(struct Node *head, int pos) {
   return head;
 }
 
+//11. check if a LL is sorted
 void check_sorted(struct Node *head) {
   printf("Enter order to check the LL:");
   char order[4];
@@ -213,29 +214,29 @@ int main() {
   struct Node *head;
   head = (struct Node*)malloc(sizeof(struct Node));
   head = create(a, head, size);
-  // display(head);
-  // count(head);
-  // sum(head);
-  // max(head);
+  display(head);
+  count(head);
+  sum(head);
+  max(head);
 
-  // int target;
-  // printf("\nEnter the element to be searched from linked list :");
-  // scanf("%d", &target);
-  // search(head, target);
-  //
-  // int pos, new_node_val;
-  // printf("\nEnter pos for new node");
-  // scanf("%d", &pos);
-  // printf("Enter new node value");
-  // scanf("%d", &new_node_val);
-  // head = insert_at_nth_pos(head, pos, new_node_val);
-  // display(head);
-  //
-  // int del_pos;
-  // printf("\n Enter aposition to delete node from:");
-  // scanf("%d", &del_pos);
-  // head = delete_at_nth_pos(head, del_pos);
-  // display(head);
+  int target;
+  printf("\nEnter the element to be searched from linked list :");
+  scanf("%d", &target);
+  search(head, target);
+
+  int pos, new_node_val;
+  printf("\nEnter pos for new node");
+  scanf("%d", &pos);
+  printf("Enter new node value");
+  scanf("%d", &new_node_val);
+  head = insert_at_nth_pos(head, pos, new_node_val);
+  display(head);
+
+  int del_pos;
+  printf("\n Enter aposition to delete node from:");
+  scanf("%d", &del_pos);
+  head = delete_at_nth_pos(head, del_pos);
+  display(head);
 
   check_sorted(head);
 
