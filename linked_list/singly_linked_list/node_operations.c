@@ -1,25 +1,29 @@
 /*
   WAP to
     1. create a LL from an array
-    2. count number of nodes
-    3. sum of the values in LL
-    4. max element in a LL
-    5. Search an element
-    6. Insert a node at any position
-    7. Insert in a sorted LL
-    8. Delete a node from LL at any position
-    9. check if a LL is sorted
-    10. remove duplicates from a sorted LL
+    2. Display a LL
+    3. count number of nodes
+    4. sum of the values in LL
+    5. max element in a LL
+    6. Search an element
+    7. Insert a node at any position
+    8. Sort an LL using selection technique
+    9. Insert in a sorted LL
+    10. Delete a node from LL at any position
+    11. check if a LL is sorted
+    12. remove duplicates from a sorted LL
 */
 
 #include<stdio.h>
-#include<stdlib.h>j
+#include<stdlib.h>
+#include<string.h>
 
 struct Node {
   int data;
   struct Node *next;
 };
 
+//1. create a LL from an array
 struct Node* create(int a[], struct Node *head, int size) {
   struct Node *current_node;
   head -> data = a[0];
@@ -35,6 +39,7 @@ struct Node* create(int a[], struct Node *head, int size) {
   return head;
 }
 
+//2. Display a LL
 void display(struct Node *head) {
   struct Node* node = head ;
   printf("Linked list elements are : ");
@@ -44,6 +49,8 @@ void display(struct Node *head) {
   }
 }
 
+
+//3. count number of nodes
 void count(struct Node *head) {
   int c = 0;
   struct Node* node = head ;
@@ -55,6 +62,7 @@ void count(struct Node *head) {
   printf("\nCount : %d", c);
 }
 
+//4. sum of the values in LL
 void sum(struct Node *head) {
   int s = 0;
   struct Node* node = head ;
@@ -66,6 +74,7 @@ void sum(struct Node *head) {
   printf("\nSum : %d", s);
 }
 
+//5. max element in a LL
 void max(struct Node *head) {
   int m = 0;
   struct Node *node = head;
@@ -79,6 +88,7 @@ void max(struct Node *head) {
   printf("\nMax : %d", m);
 }
 
+//6. Search an element
 void search(struct Node *head, int target) {
   struct Node *node = head;
   while(node != NULL) {
@@ -91,6 +101,7 @@ void search(struct Node *head, int target) {
   printf("\nElement %d is not found in LL", target);
 }
 
+//7. Insert a node at any position
 struct Node* insert_at_nth_pos(struct Node *head, int pos, int node_value) {
   struct Node *curr_node = head;
   struct Node *prev_node = NULL;
@@ -124,6 +135,69 @@ struct Node* insert_at_nth_pos(struct Node *head, int pos, int node_value) {
   return head;
 }
 
+//10. Delete a node from LL at any position
+struct Node* delete_at_nth_pos(struct Node *head, int pos) {
+  struct Node *curr_node = head;
+  struct Node *prev_node = NULL;
+  int curr_pos = 1;
+
+  while(curr_node != NULL) {
+    if(pos == 1) {
+      head = curr_node -> next;
+      free(curr_node);
+      return head;
+    }
+    if(curr_pos == pos) {
+      prev_node -> next = curr_node -> next;
+      free(curr_node);
+      return head;
+    }
+    curr_pos++;
+    prev_node = curr_node;
+    curr_node = curr_node -> next;
+  }
+
+  return head;
+}
+
+void check_sorted(struct Node *head) {
+  printf("Enter order to check the LL:");
+  char order[4];
+  scanf("%s", order);
+
+  struct Node *curr_node = head;
+  struct Node *prev_node = NULL;
+  int flag = 0;
+
+  while(curr_node) {
+    if(curr_node -> next == NULL) {
+      break;
+    }
+    prev_node = curr_node;
+    curr_node = curr_node -> next;
+
+    if(strcmp(order, "asc") == 0) {
+      if(curr_node -> data > prev_node -> data) {
+        flag = 1;
+        continue;
+      }
+      flag = 0;
+      break;
+    } else if(strcmp(order, "desc") == 0) {
+      f(curr_node -> data < prev_node -> data) {
+        flag = 1;
+        continue;
+      }
+      flag = 0;
+      break;
+    }
+  }
+  if(flag == 0){
+    printf("\nNot sorted");
+  } else {
+    printf("\nSorted");
+  }
+}
 
 int main() {
   int size;
@@ -139,21 +213,30 @@ int main() {
   struct Node *head;
   head = (struct Node*)malloc(sizeof(struct Node));
   head = create(a, head, size);
-  display(head);
-  count(head);
-  sum(head);
-  max(head);
+  // display(head);
+  // count(head);
+  // sum(head);
+  // max(head);
 
-  int target;
-  printf("\nEnter the element to be searched from linked list :");
-  scanf("%d", &target);
-  search(head, target);
+  // int target;
+  // printf("\nEnter the element to be searched from linked list :");
+  // scanf("%d", &target);
+  // search(head, target);
+  //
+  // int pos, new_node_val;
+  // printf("\nEnter pos for new node");
+  // scanf("%d", &pos);
+  // printf("Enter new node value");
+  // scanf("%d", &new_node_val);
+  // head = insert_at_nth_pos(head, pos, new_node_val);
+  // display(head);
+  //
+  // int del_pos;
+  // printf("\n Enter aposition to delete node from:");
+  // scanf("%d", &del_pos);
+  // head = delete_at_nth_pos(head, del_pos);
+  // display(head);
 
-  int pos, new_node_val;
-  printf("\nEnter pos for new node");
-  scanf("%d", &pos);
-  printf("Enter new node value");
-  scanf("%d", &new_node_val);
-  head = insert_at_nth_pos(head, pos, new_node_val);
-  display(head);
+  check_sorted(head);
+
 }
