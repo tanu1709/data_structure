@@ -8,10 +8,10 @@
     6. Search an element
     7. Insert a node at any position
     8. Sort an LL using selection technique
-    9. Insert in a sorted LL
-    10. Delete a node from LL at any position
-    11. check if a LL is sorted
-    12. remove duplicates from a sorted LL
+    9. Delete a node from LL at any position
+    10. check if a LL is sorted
+    11. remove duplicates from a sorted LL
+    12. remove duplicates from a LL
 */
 
 #include<stdio.h>
@@ -42,7 +42,7 @@ struct Node* create(int a[], struct Node *head, int size) {
 //2. Display a LL
 void display(struct Node *head) {
   struct Node* node = head ;
-  printf("Linked list elements are : ");
+  printf("\nLinked list elements are : ");
   while(node != NULL) {
     printf("%d \n", node->data);
     node = node->next;
@@ -162,7 +162,7 @@ struct Node* delete_at_nth_pos(struct Node *head, int pos) {
 
 //11. check if a LL is sorted
 void check_sorted(struct Node *head) {
-  printf("Enter order to check the LL:");
+  printf("\nEnter order to check the LL:");
   char order[4];
   scanf("%s", order);
 
@@ -185,7 +185,7 @@ void check_sorted(struct Node *head) {
       flag = 0;
       break;
     } else if(strcmp(order, "desc") == 0) {
-      f(curr_node -> data < prev_node -> data) {
+      if(curr_node -> data < prev_node -> data) {
         flag = 1;
         continue;
       }
@@ -197,6 +197,49 @@ void check_sorted(struct Node *head) {
     printf("\nNot sorted");
   } else {
     printf("\nSorted");
+  }
+}
+
+//12. remove duplicates from a sorted LL
+void remove_duplicates_from_sorted_ll(struct Node *head) {
+  struct Node *curr_node = head;
+  struct Node *prev_node = NULL;
+
+  while(curr_node) {
+
+    if(prev_node && (prev_node -> data == curr_node -> data)) {
+      prev_node -> next = curr_node -> next;
+      free(curr_node);
+      curr_node = prev_node -> next;
+    } else {
+      prev_node = curr_node;
+      curr_node = curr_node -> next;
+    }
+  }
+}
+
+//13. remove duplicates from a LL
+void remove_duplicates_from_unsorted_ll(struct Node *head) {
+  struct Node *curr_node = head;
+  struct Node *curr_node_next = NULL;
+  struct Node *prev_node = NULL;
+
+  while(curr_node) {
+    curr_node_next = curr_node -> next;
+    prev_node = curr_node;
+
+    while(curr_node_next) {
+
+      if(curr_node -> data == curr_node_next -> data) {
+        prev_node -> next = curr_node_next -> next;
+        free(curr_node_next);
+        curr_node_next = prev_node -> next;
+      } else {
+        prev_node = curr_node_next;
+        curr_node_next = curr_node_next -> next;
+      }
+    }
+    curr_node = curr_node -> next;
   }
 }
 
@@ -227,7 +270,7 @@ int main() {
   int pos, new_node_val;
   printf("\nEnter pos for new node");
   scanf("%d", &pos);
-  printf("Enter new node value");
+  printf("\nEnter new node value");
   scanf("%d", &new_node_val);
   head = insert_at_nth_pos(head, pos, new_node_val);
   display(head);
@@ -239,5 +282,11 @@ int main() {
   display(head);
 
   check_sorted(head);
+
+  remove_duplicates_from_sorted_ll(head);
+  display(head);
+
+  remove_duplicates_from_unsorted_ll(head);
+  display(head);
 
 }
