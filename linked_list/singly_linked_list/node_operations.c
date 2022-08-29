@@ -7,7 +7,7 @@
     5. max element in a LL
     6. Search an element
     7. Insert a node at any position
-    8. Sort an LL using selection technique
+    8. Sort a LL using selection sort technique
     9. Delete a node from LL at any position
     10. check if a LL is sorted
     11. remove duplicates from a sorted LL
@@ -48,7 +48,6 @@ void display(struct Node *head) {
     node = node->next;
   }
 }
-
 
 //3. count number of nodes
 void count(struct Node *head) {
@@ -135,7 +134,41 @@ struct Node* insert_at_nth_pos(struct Node *head, int pos, int node_value) {
   return head;
 }
 
-//10. Delete a node from LL at any position
+//8. Sort a LL using selection sort technique
+void selectin_sort(struct Node *head) {
+  printf("\nEnter order to sort the LL:");
+  char order[4];
+  scanf("%s", order);
+
+  struct Node *curr_node = head;
+  struct Node *curr_node_next = NULL;
+  int temp;
+
+  while(curr_node) {
+    curr_node_next = curr_node -> next;
+    prev_node = curr_node;
+
+    while(curr_node_next) {
+      if(strcmp(order, "asc") == 0) {
+        if(curr_node -> data > curr_node_next -> data) {
+          temp = curr_node -> data;
+          curr_node -> data = curr_node_next -> data;
+          curr_node_next -> data = temp;
+        }
+      } else if(strcmp(order, "desc") == 0) {
+        if(curr_node -> data < curr_node_next -> data) {
+          temp = curr_node -> data;
+          curr_node -> data = curr_node_next -> data;
+          curr_node_next -> data = temp;
+        }
+      }
+      curr_node_next = curr_node_next -> next;
+    }
+    curr_node = curr_node -> next;
+  }
+}
+
+//9. Delete a node from LL at any position
 struct Node* delete_at_nth_pos(struct Node *head, int pos) {
   struct Node *curr_node = head;
   struct Node *prev_node = NULL;
@@ -160,7 +193,7 @@ struct Node* delete_at_nth_pos(struct Node *head, int pos) {
   return head;
 }
 
-//11. check if a LL is sorted
+//10. check if a LL is sorted
 void check_sorted(struct Node *head) {
   printf("\nEnter order to check the LL:");
   char order[4];
@@ -200,7 +233,7 @@ void check_sorted(struct Node *head) {
   }
 }
 
-//12. remove duplicates from a sorted LL
+//11. remove duplicates from a sorted LL
 void remove_duplicates_from_sorted_ll(struct Node *head) {
   struct Node *curr_node = head;
   struct Node *prev_node = NULL;
@@ -218,7 +251,7 @@ void remove_duplicates_from_sorted_ll(struct Node *head) {
   }
 }
 
-//13. remove duplicates from a LL
+//12. remove duplicates from a LL
 void remove_duplicates_from_unsorted_ll(struct Node *head) {
   struct Node *curr_node = head;
   struct Node *curr_node_next = NULL;
@@ -287,6 +320,9 @@ int main() {
   display(head);
 
   remove_duplicates_from_unsorted_ll(head);
+  display(head);
+
+  selectin_sort(head);
   display(head);
 
 }
